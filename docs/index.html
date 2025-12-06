@@ -1,1 +1,1907 @@
-firstfile
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Services Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            color: #1f2937;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #4b5563;
+            font-size: 1.1rem;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #9ca3af;
+        }
+
+        .card-icon {
+            width: 100%;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+        }
+
+        .card:nth-child(1) .card-icon { background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%); }
+        .card:nth-child(2) .card-icon { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); }
+        .card:nth-child(3) .card-icon { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .card:nth-child(4) .card-icon { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .card:nth-child(5) .card-icon { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .card:nth-child(6) .card-icon { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .card-description {
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .card-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .card-features li {
+            color: #6b7280;
+            font-size: 0.85rem;
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .card-features li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: #374151;
+            font-weight: bold;
+        }
+
+        .card-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: transparent;
+            color: #374151;
+            text-decoration: none;
+            border: 1px solid #374151;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .card-button:hover {
+            background: #1f2937;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== MINI PROJECT 2: FEATURE SECTION ========== */
+        .section-divider {
+            max-width: 1200px;
+            margin: 80px auto 40px;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 60px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            color: #1f2937;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: #4b5563;
+            font-size: 1rem;
+        }
+
+        .feature-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 350px;
+        }
+
+        .feature-column {
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            flex-basis: 250px;
+            flex-grow: 1;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+
+        .feature-column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: #9ca3af;
+        }
+
+        /* Middle column takes more space using flex-grow */
+        .feature-column.featured {
+            flex-grow: 2;
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        /* Using align-self to vertically align icons differently in each column */
+        .feature-column:nth-child(1) .feature-icon {
+            align-self: flex-start;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+        }
+
+        .feature-column:nth-child(2) .feature-icon {
+            align-self: center;
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+        }
+
+        .feature-column:nth-child(3) .feature-icon {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            color: #6b7280;
+            font-size: 0.9rem;
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        /* Responsive: flex-wrap makes columns stack on smaller screens */
+        @media (max-width: 900px) {
+            .feature-column {
+                flex-basis: 100%;
+            }
+            .feature-column.featured {
+                flex-grow: 1;
+            }
+            .feature-column:nth-child(1) .feature-icon,
+            .feature-column:nth-child(2) .feature-icon,
+            .feature-column:nth-child(3) .feature-icon {
+                align-self: flex-start;
+            }
+        }
+
+        /* ========== MINI PROJECT 3: RESPONSIVE CARD LAYOUT ========== */
+        .resp-card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .resp-card {
+            display: flex;
+            flex-direction: column;
+            flex-basis: 280px;
+            flex-grow: 1;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+
+        .resp-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #9ca3af;
+        }
+
+        /* Using align-self to adjust alignment for specific cards */
+        .resp-card:nth-child(1) {
+            align-self: flex-start;
+        }
+
+        .resp-card:nth-child(2) {
+            align-self: center;
+        }
+
+        .resp-card:nth-child(3) {
+            align-self: flex-end;
+        }
+
+        .resp-card:nth-child(4) {
+            align-self: stretch;
+        }
+
+        .resp-card:nth-child(5) {
+            align-self: center;
+        }
+
+        .resp-card:nth-child(6) {
+            align-self: flex-start;
+        }
+
+        .resp-card-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            position: relative;
+        }
+
+        .resp-card:nth-child(1) .resp-card-image { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .resp-card:nth-child(2) .resp-card-image { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .resp-card:nth-child(3) .resp-card-image { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .resp-card:nth-child(4) .resp-card-image { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .resp-card:nth-child(5) .resp-card-image { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .resp-card:nth-child(6) .resp-card-image { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+
+        .resp-card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .resp-card-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #f3f4f6;
+            color: #374151;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            align-self: flex-start;
+        }
+
+        .resp-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .resp-card-text {
+            color: #4b5563;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            flex-grow: 1;
+            margin-bottom: 15px;
+        }
+
+        .resp-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .resp-card-price {
+            color: #10b981;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .resp-card-btn {
+            padding: 10px 20px;
+            background: #374151;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .resp-card-btn:hover {
+            transform: scale(1.05);
+            background: #1f2937;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive: flex-wrap handles wrapping */
+        @media (max-width: 768px) {
+            .resp-card {
+                flex-basis: 100%;
+                align-self: stretch !important;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .resp-card {
+                flex-basis: calc(50% - 15px);
+            }
+        }
+
+        /* ========== MINI PROJECT 4: RESPONSIVE PRODUCT GRID ========== */
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            flex-basis: 220px;
+            flex-grow: 1;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Featured products take more space using flex-grow */
+        .product-card.featured-product {
+            flex-grow: 2;
+            flex-basis: 300px;
+            border-color: #f59e0b;
+            position: relative;
+        }
+
+        .product-card.featured-product::before {
+            content: 'BESTSELLER';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #fff;
+            padding: 5px 40px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+            z-index: 10;
+        }
+
+        /* Nested flexbox for product card content */
+        .product-image-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:nth-child(1) .product-image-wrapper { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .product-card:nth-child(2) .product-image-wrapper { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .product-card:nth-child(3) .product-image-wrapper { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .product-card:nth-child(4) .product-image-wrapper { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .product-card:nth-child(5) .product-image-wrapper { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+        .product-card:nth-child(6) .product-image-wrapper { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
+        .product-card:nth-child(7) .product-image-wrapper { background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); }
+        .product-card:nth-child(8) .product-image-wrapper { background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%); }
+
+        .product-image {
+            font-size: 72px;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* Nested flexbox for product details */
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .product-category {
+            color: #374151;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .product-title {
+            color: #1f2937;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            color: #4b5563;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            flex-grow: 1;
+            margin-bottom: 15px;
+        }
+
+        /* Nested flexbox for price section */
+        .product-price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .product-price {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-price .current {
+            color: #10b981;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .product-price .original {
+            color: #64748b;
+            font-size: 0.85rem;
+            text-decoration: line-through;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #f59e0b;
+            font-size: 0.85rem;
+        }
+
+        .product-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            background: #374151;
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .product-btn:hover {
+            background: #1f2937;
+        }
+
+        @media (max-width: 768px) {
+            .product-card {
+                flex-basis: 100%;
+            }
+            .product-card.featured-product {
+                flex-grow: 1;
+            }
+        }
+
+        /* ========== MINI PROJECT 5: PRICING TABLE LAYOUT ========== */
+        .pricing-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+            align-items: stretch;
+        }
+
+        .pricing-card {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 280px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        /* Hover scale effect on plans */
+        .pricing-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Middle plan emphasized with flex-grow, box-shadow and gradient */
+        .pricing-card.popular {
+            flex-grow: 1.5;
+            border-color: #374151;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .pricing-card.popular:hover {
+            transform: scale(1.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .pricing-header {
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Different gradient backgrounds for each plan */
+        .pricing-card:nth-child(1) .pricing-header {
+            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+        }
+        .pricing-card:nth-child(2) .pricing-header {
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+        }
+        .pricing-card:nth-child(3) .pricing-header {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: #fff;
+            padding: 5px 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .pricing-plan {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .pricing-amount {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .pricing-currency {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+        }
+
+        .pricing-value {
+            color: #fff;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .pricing-period {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .pricing-body {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-features {
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            color: #4b5563;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li .check {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .pricing-features li .cross {
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        .pricing-cta {
+            margin-top: 20px;
+        }
+
+        .pricing-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .pricing-btn.outline {
+            background: transparent;
+            border: 2px solid #374151;
+            color: #374151;
+        }
+
+        .pricing-btn.outline:hover {
+            background: #374151;
+            color: #fff;
+        }
+
+        .pricing-btn.filled {
+            background: #374151;
+            color: #fff;
+        }
+
+        .pricing-btn.filled:hover {
+            background: #1f2937;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-btn.premium {
+            background: #1f2937;
+            color: #fff;
+        }
+
+        .pricing-btn.premium:hover {
+            background: #111827;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (max-width: 900px) {
+            .pricing-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .pricing-card {
+                width: 100%;
+                max-width: 400px;
+            }
+            .pricing-card.popular {
+                transform: none;
+                order: -1;
+            }
+            .pricing-card.popular:hover {
+                transform: scale(1.03);
+            }
+        }
+
+        /* ========== MINI PROJECT 6: FLEXBOX NAVIGATION BAR ========== */
+        .flex-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 15px 30px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Logo - aligned left */
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1f2937;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            font-size: 1.8rem;
+        }
+
+        .nav-logo-text {
+            color: #1f2937;
+        }
+
+        /* Nav links - aligned center with gap */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #4b5563;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #1f2937;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #374151;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #1f2937;
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Button - aligned right */
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: #374151;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            background: #1f2937;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #374151;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* Responsive navbar with media queries */
+        @media (max-width: 768px) {
+            .flex-navbar {
+                padding: 15px 20px;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                flex-basis: 100%;
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px 0;
+                display: none;
+                order: 3;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-btn {
+                order: 2;
+            }
+        }
+
+        /* ========== MINI PROJECT 7: FLEXBOX CONTACT SECTION ========== */
+        .contact-flex {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        /* Left side: Contact Form */
+        .contact-form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-form h3 {
+            color: #1f2937;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: #4b5563;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 14px 16px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            color: #1f2937;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #374151;
+            box-shadow: 0 0 0 3px rgba(55, 65, 81, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .contact-submit {
+            padding: 14px 30px;
+            background: #374151;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            align-self: flex-start;
+        }
+
+        .contact-submit:hover {
+            transform: translateY(-2px);
+            background: #1f2937;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Right side: Contact Info */
+        .contact-info {
+            flex: 0 0 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 12px;
+        }
+
+        .contact-info h3 {
+            color: #1f2937;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e5e7eb;
+            border-radius: 10px;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .info-content h4 {
+            color: #1f2937;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .info-content p {
+            color: #4b5563;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .contact-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e5e7eb;
+            border-radius: 8px;
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: #374151;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive stacking on smaller screens */
+        @media (max-width: 768px) {
+            .contact-flex {
+                flex-direction: column;
+                padding: 25px;
+            }
+            .contact-info {
+                flex: 1;
+            }
+            .form-row {
+                flex-direction: column;
+            }
+        }
+
+        /* ========== MINI PROJECT 8: NEWSLETTER SIGNUP BANNER ========== */
+        .newsletter-section {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .newsletter-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding: 50px 60px;
+            background: linear-gradient(135deg, #7c3aed 0%, #00d4ff 100%);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .newsletter-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: 10%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .newsletter-content {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-content h3 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .newsletter-content p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-input {
+            padding: 16px 24px;
+            width: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #1f2937;
+            font-family: inherit;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        .newsletter-input::placeholder {
+            color: #6b7280;
+        }
+
+        .newsletter-btn {
+            padding: 16px 32px;
+            background: #1f2937;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .newsletter-btn:hover {
+            background: #111827;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive newsletter banner */
+        @media (max-width: 900px) {
+            .newsletter-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 30px;
+            }
+            .newsletter-form {
+                flex-direction: column;
+                width: 100%;
+            }
+            .newsletter-input {
+                width: 100%;
+            }
+            .newsletter-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>IT Services Platform</h1>
+        <p>Enterprise solutions for modern businesses</p>
+    </div>
+
+    <div class="card-container">
+        <div class="card">
+            <div class="card-icon">&#9729;</div>
+            <div class="card-content">
+                <h2 class="card-title">Cloud Infrastructure</h2>
+                <p class="card-description">Scalable cloud solutions with 99.9% uptime guarantee. Deploy and manage your infrastructure effortlessly.</p>
+                <ul class="card-features">
+                    <li>AWS, Azure, GCP</li>
+                    <li>Auto-scaling</li>
+                    <li>24/7 Monitoring</li>
+                </ul>
+                <a href="#" class="card-button">Explore</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">&#128274;</div>
+            <div class="card-content">
+                <h2 class="card-title">Cybersecurity</h2>
+                <p class="card-description">Protect your digital assets with enterprise-grade security solutions and threat detection.</p>
+                <ul class="card-features">
+                    <li>Threat Detection</li>
+                    <li>Penetration Testing</li>
+                    <li>Compliance Audits</li>
+                </ul>
+                <a href="#" class="card-button">Explore</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">&#128187;</div>
+            <div class="card-content">
+                <h2 class="card-title">DevOps Solutions</h2>
+                <p class="card-description">Streamline your development pipeline with CI/CD automation and containerization.</p>
+                <ul class="card-features">
+                    <li>CI/CD Pipelines</li>
+                    <li>Kubernetes & Docker</li>
+                    <li>Infrastructure as Code</li>
+                </ul>
+                <a href="#" class="card-button">Explore</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">&#128202;</div>
+            <div class="card-content">
+                <h2 class="card-title">Data Analytics</h2>
+                <p class="card-description">Transform raw data into actionable insights with advanced analytics and visualization.</p>
+                <ul class="card-features">
+                    <li>Business Intelligence</li>
+                    <li>Machine Learning</li>
+                    <li>Real-time Dashboards</li>
+                </ul>
+                <a href="#" class="card-button">Explore</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">&#128268;</div>
+            <div class="card-content">
+                <h2 class="card-title">API Integration</h2>
+                <p class="card-description">Connect your systems seamlessly with robust API development and third-party integrations.</p>
+                <ul class="card-features">
+                    <li>RESTful & GraphQL</li>
+                    <li>Microservices</li>
+                    <li>Legacy Integration</li>
+                </ul>
+                <a href="#" class="card-button">Explore</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">&#128736;</div>
+            <div class="card-content">
+                <h2 class="card-title">IT Support</h2>
+                <p class="card-description">Round-the-clock technical support and managed services to keep your operations running.</p>
+                <ul class="card-features">
+                    <li>24/7 Help Desk</li>
+                    <li>Remote Support</li>
+                    <li>SLA Guarantee</li>
+                </ul>
+                <a href="#" class="card-button">Explore</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MINI PROJECT 2: FEATURE SECTION ========== -->
+    <div class="section-divider">
+        <div class="section-header">
+            <h2>Why Choose Us</h2>
+            <p>Powerful features designed to accelerate your business growth</p>
+        </div>
+
+        <div class="feature-container">
+            <!-- Column 1: Icon aligned to top (flex-start) -->
+            <div class="feature-column">
+                <div class="feature-icon">&#9889;</div>
+                <h3 class="feature-title">Lightning Fast</h3>
+                <p class="feature-description">Experience blazing fast performance with our optimized infrastructure and cutting-edge technology stack.</p>
+                <ul class="feature-list">
+                    <li>Sub-second response times</li>
+                    <li>Global CDN distribution</li>
+                    <li>Optimized caching</li>
+                </ul>
+            </div>
+
+            <!-- Column 2: Featured (flex-grow: 2), Icon aligned to center -->
+            <div class="feature-column featured">
+                <div class="feature-icon">&#128640;</div>
+                <h3 class="feature-title">Scale Without Limits</h3>
+                <p class="feature-description">Our platform grows with your business. From startup to enterprise, we handle millions of requests seamlessly with automatic scaling and load balancing.</p>
+                <ul class="feature-list">
+                    <li>Auto-scaling infrastructure</li>
+                    <li>99.99% uptime SLA</li>
+                    <li>Multi-region deployment</li>
+                    <li>Load balancing</li>
+                    <li>Unlimited bandwidth</li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Icon aligned to bottom (flex-end) -->
+            <div class="feature-column">
+                <div class="feature-icon">&#128272;</div>
+                <h3 class="feature-title">Enterprise Security</h3>
+                <p class="feature-description">Bank-grade security protocols protect your data with end-to-end encryption and compliance certifications.</p>
+                <ul class="feature-list">
+                    <li>SOC 2 Type II certified</li>
+                    <li>End-to-end encryption</li>
+                    <li>Role-based access control</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MINI PROJECT 3: RESPONSIVE CARD LAYOUT ========== -->
+    <div class="section-divider">
+        <div class="section-header">
+            <h2>Our Products</h2>
+            <p>Explore our range of software solutions and services</p>
+        </div>
+
+        <div class="resp-card-container">
+            <!-- Card 1: align-self: flex-start -->
+            <div class="resp-card">
+                <div class="resp-card-image">&#128187;</div>
+                <div class="resp-card-body">
+                    <span class="resp-card-tag">Software</span>
+                    <h3 class="resp-card-title">Project Manager Pro</h3>
+                    <p class="resp-card-text">Streamline your workflow with our comprehensive project management solution.</p>
+                    <div class="resp-card-footer">
+                        <span class="resp-card-price">&#8377;2,499/mo</span>
+                        <button class="resp-card-btn">Get Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: align-self: center -->
+            <div class="resp-card">
+                <div class="resp-card-image">&#9729;</div>
+                <div class="resp-card-body">
+                    <span class="resp-card-tag">Cloud</span>
+                    <h3 class="resp-card-title">Cloud Storage Plus</h3>
+                    <p class="resp-card-text">Secure, scalable cloud storage with automatic backup and sync across all devices.</p>
+                    <div class="resp-card-footer">
+                        <span class="resp-card-price">&#8377;1,599/mo</span>
+                        <button class="resp-card-btn">Get Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: align-self: flex-end -->
+            <div class="resp-card">
+                <div class="resp-card-image">&#128272;</div>
+                <div class="resp-card-body">
+                    <span class="resp-card-tag">Security</span>
+                    <h3 class="resp-card-title">SecureShield VPN</h3>
+                    <p class="resp-card-text">Enterprise-grade VPN protection for your entire organization.</p>
+                    <div class="resp-card-footer">
+                        <span class="resp-card-price">&#8377;4,199/mo</span>
+                        <button class="resp-card-btn">Get Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: align-self: stretch -->
+            <div class="resp-card">
+                <div class="resp-card-image">&#128202;</div>
+                <div class="resp-card-body">
+                    <span class="resp-card-tag">Analytics</span>
+                    <h3 class="resp-card-title">DataInsight Dashboard</h3>
+                    <p class="resp-card-text">Transform your data into actionable insights with real-time analytics and visualization tools.</p>
+                    <div class="resp-card-footer">
+                        <span class="resp-card-price">&#8377;6,699/mo</span>
+                        <button class="resp-card-btn">Get Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: align-self: center -->
+            <div class="resp-card">
+                <div class="resp-card-image">&#128231;</div>
+                <div class="resp-card-body">
+                    <span class="resp-card-tag">Communication</span>
+                    <h3 class="resp-card-title">TeamChat Enterprise</h3>
+                    <p class="resp-card-text">Unified communication platform with video conferencing, messaging, and file sharing.</p>
+                    <div class="resp-card-footer">
+                        <span class="resp-card-price">&#8377;1,299/mo</span>
+                        <button class="resp-card-btn">Get Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6: align-self: flex-start -->
+            <div class="resp-card">
+                <div class="resp-card-image">&#128736;</div>
+                <div class="resp-card-body">
+                    <span class="resp-card-tag">DevTools</span>
+                    <h3 class="resp-card-title">CodeFlow IDE</h3>
+                    <p class="resp-card-text">Modern integrated development environment with AI-powered code completion.</p>
+                    <div class="resp-card-footer">
+                        <span class="resp-card-price">&#8377;3,299/mo</span>
+                        <button class="resp-card-btn">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MINI PROJECT 4: RESPONSIVE PRODUCT GRID ========== -->
+    <div class="section-divider">
+        <div class="section-header">
+            <h2>IT Training Courses</h2>
+            <p>Training with Placements - Upskill your career today</p>
+        </div>
+
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <span class="product-badge">New</span>
+                    <span class="product-image">&#128187;</span>
+                </div>
+                <div class="product-details">
+                    <span class="product-category">Web Development</span>
+                    <h3 class="product-title">Full Stack Development</h3>
+                    <p class="product-desc">Master HTML, CSS, JavaScript, React, Node.js and MongoDB.</p>
+                    <div class="product-price-row">
+                        <div class="product-price">
+                            <span class="current">&#8377;24,999</span>
+                            <span class="original">&#8377;39,999</span>
+                        </div>
+                        <div class="product-rating">&#9733;&#9733;&#9733;&#9733;&#9733; 4.9</div>
+                    </div>
+                </div>
+                <button class="product-btn">&#128722; Enroll Now</button>
+            </div>
+
+            <!-- Product 2 - Featured -->
+            <div class="product-card featured-product">
+                <div class="product-image-wrapper">
+                    <span class="product-badge">Hot</span>
+                    <span class="product-image">&#129302;</span>
+                </div>
+                <div class="product-details">
+                    <span class="product-category">Artificial Intelligence</span>
+                    <h3 class="product-title">Data Science & AI/ML</h3>
+                    <p class="product-desc">Learn Python, Machine Learning, Deep Learning, TensorFlow and real-world AI projects with placement assistance.</p>
+                    <div class="product-price-row">
+                        <div class="product-price">
+                            <span class="current">&#8377;34,999</span>
+                            <span class="original">&#8377;54,999</span>
+                        </div>
+                        <div class="product-rating">&#9733;&#9733;&#9733;&#9733;&#9733; 5.0</div>
+                    </div>
+                </div>
+                <button class="product-btn">&#128722; Enroll Now</button>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <span class="product-image">&#9729;</span>
+                </div>
+                <div class="product-details">
+                    <span class="product-category">Cloud Computing</span>
+                    <h3 class="product-title">AWS & Azure Certification</h3>
+                    <p class="product-desc">Get certified in AWS Solutions Architect and Azure Administrator.</p>
+                    <div class="product-price-row">
+                        <div class="product-price">
+                            <span class="current">&#8377;19,999</span>
+                            <span class="original">&#8377;29,999</span>
+                        </div>
+                        <div class="product-rating">&#9733;&#9733;&#9733;&#9733;&#9734; 4.7</div>
+                    </div>
+                </div>
+                <button class="product-btn">&#128722; Enroll Now</button>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <span class="product-badge">Popular</span>
+                    <span class="product-image">&#128274;</span>
+                </div>
+                <div class="product-details">
+                    <span class="product-category">Cybersecurity</span>
+                    <h3 class="product-title">Ethical Hacking & Security</h3>
+                    <p class="product-desc">Learn penetration testing, network security, and ethical hacking.</p>
+                    <div class="product-price-row">
+                        <div class="product-price">
+                            <span class="current">&#8377;22,999</span>
+                            <span class="original">&#8377;34,999</span>
+                        </div>
+                        <div class="product-rating">&#9733;&#9733;&#9733;&#9733;&#9733; 4.8</div>
+                    </div>
+                </div>
+                <button class="product-btn">&#128722; Enroll Now</button>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <span class="product-image">&#128225;</span>
+                </div>
+                <div class="product-details">
+                    <span class="product-category">Mobile Development</span>
+                    <h3 class="product-title">React Native & Flutter</h3>
+                    <p class="product-desc">Build cross-platform mobile apps for iOS and Android.</p>
+                    <div class="product-price-row">
+                        <div class="product-price">
+                            <span class="current">&#8377;21,999</span>
+                            <span class="original">&#8377;32,999</span>
+                        </div>
+                        <div class="product-rating">&#9733;&#9733;&#9733;&#9733;&#9734; 4.6</div>
+                    </div>
+                </div>
+                <button class="product-btn">&#128722; Enroll Now</button>
+            </div>
+
+            <!-- Product 6 - Featured -->
+            <div class="product-card featured-product">
+                <div class="product-image-wrapper">
+                    <span class="product-badge">Trending</span>
+                    <span class="product-image">&#128736;</span>
+                </div>
+                <div class="product-details">
+                    <span class="product-category">DevOps</span>
+                    <h3 class="product-title">DevOps & CI/CD Mastery</h3>
+                    <p class="product-desc">Master Docker, Kubernetes, Jenkins, Git, Terraform and complete CI/CD pipeline implementation with hands-on projects.</p>
+                    <div class="product-price-row">
+                        <div class="product-price">
+                            <span class="current">&#8377;29,999</span>
+                            <span class="original">&#8377;44,999</span>
+                        </div>
+                        <div class="product-rating">&#9733;&#9733;&#9733;&#9733;&#9733; 4.9</div>
+                    </div>
+                </div>
+                <button class="product-btn">&#128722; Enroll Now</button>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <span class="product-image">&#128202;</span>
+                </div>
+                <div class="product-details">
+                    <span class="product-category">Database</span>
+                    <h3 class="product-title">SQL & Database Admin</h3>
+                    <p class="product-desc">Master MySQL, PostgreSQL, MongoDB and database administration.</p>
+                    <div class="product-price-row">
+                        <div class="product-price">
+                            <span class="current">&#8377;14,999</span>
+                            <span class="original">&#8377;24,999</span>
+                        </div>
+                        <div class="product-rating">&#9733;&#9733;&#9733;&#9733;&#9734; 4.5</div>
+                    </div>
+                </div>
+                <button class="product-btn">&#128722; Enroll Now</button>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <span class="product-badge">New</span>
+                    <span class="product-image">&#127760;</span>
+                </div>
+                <div class="product-details">
+                    <span class="product-category">Testing</span>
+                    <h3 class="product-title">Automation Testing</h3>
+                    <p class="product-desc">Learn Selenium, Cypress, Jest and automated testing frameworks.</p>
+                    <div class="product-price-row">
+                        <div class="product-price">
+                            <span class="current">&#8377;17,999</span>
+                            <span class="original">&#8377;27,999</span>
+                        </div>
+                        <div class="product-rating">&#9733;&#9733;&#9733;&#9733;&#9733; 4.8</div>
+                    </div>
+                </div>
+                <button class="product-btn">&#128722; Enroll Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MINI PROJECT 5: PRICING TABLE LAYOUT ========== -->
+    <div class="section-divider">
+        <div class="section-header">
+            <h2>Choose Your Plan</h2>
+            <p>Flexible pricing plans to fit your learning needs</p>
+        </div>
+
+        <div class="pricing-container">
+            <!-- Basic Plan -->
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3 class="pricing-plan">Basic</h3>
+                    <div class="pricing-amount">
+                        <span class="pricing-currency">&#8377;</span>
+                        <span class="pricing-value">4,999</span>
+                        <span class="pricing-period">/month</span>
+                    </div>
+                </div>
+                <div class="pricing-body">
+                    <ul class="pricing-features">
+                        <li><span class="check">&#10003;</span> Access to 5 courses</li>
+                        <li><span class="check">&#10003;</span> Basic support</li>
+                        <li><span class="check">&#10003;</span> Course completion certificate</li>
+                        <li><span class="cross">&#10007;</span> Live sessions</li>
+                        <li><span class="cross">&#10007;</span> Placement assistance</li>
+                        <li><span class="cross">&#10007;</span> 1-on-1 mentorship</li>
+                    </ul>
+                    <div class="pricing-cta">
+                        <button class="pricing-btn outline">Get Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pro Plan - Popular/Highlighted -->
+            <div class="pricing-card popular">
+                <div class="pricing-header">
+                    <span class="popular-badge">MOST POPULAR</span>
+                    <h3 class="pricing-plan">Pro</h3>
+                    <div class="pricing-amount">
+                        <span class="pricing-currency">&#8377;</span>
+                        <span class="pricing-value">9,999</span>
+                        <span class="pricing-period">/month</span>
+                    </div>
+                </div>
+                <div class="pricing-body">
+                    <ul class="pricing-features">
+                        <li><span class="check">&#10003;</span> Access to all courses</li>
+                        <li><span class="check">&#10003;</span> Priority support</li>
+                        <li><span class="check">&#10003;</span> Course completion certificate</li>
+                        <li><span class="check">&#10003;</span> Weekly live sessions</li>
+                        <li><span class="check">&#10003;</span> Placement assistance</li>
+                        <li><span class="cross">&#10007;</span> 1-on-1 mentorship</li>
+                    </ul>
+                    <div class="pricing-cta">
+                        <button class="pricing-btn filled">Get Started</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premium Plan -->
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3 class="pricing-plan">Premium</h3>
+                    <div class="pricing-amount">
+                        <span class="pricing-currency">&#8377;</span>
+                        <span class="pricing-value">19,999</span>
+                        <span class="pricing-period">/month</span>
+                    </div>
+                </div>
+                <div class="pricing-body">
+                    <ul class="pricing-features">
+                        <li><span class="check">&#10003;</span> Access to all courses</li>
+                        <li><span class="check">&#10003;</span> 24/7 dedicated support</li>
+                        <li><span class="check">&#10003;</span> Course completion certificate</li>
+                        <li><span class="check">&#10003;</span> Daily live sessions</li>
+                        <li><span class="check">&#10003;</span> Guaranteed placement</li>
+                        <li><span class="check">&#10003;</span> 1-on-1 mentorship</li>
+                    </ul>
+                    <div class="pricing-cta">
+                        <button class="pricing-btn premium">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MINI PROJECT 6: FLEXBOX NAVIGATION BAR ========== -->
+    <div class="section-divider">
+        <div class="section-header">
+            <h2>Navigation Bar Demo</h2>
+            <p>Responsive flexbox navbar with logo, links, and CTA button</p>
+        </div>
+
+        <nav class="flex-navbar">
+            <!-- Logo - Left aligned -->
+            <a href="#" class="nav-logo">
+                <span class="nav-logo-icon">&#128187;</span>
+                <span class="nav-logo-text">TechLearn</span>
+            </a>
+
+            <!-- Mobile toggle button -->
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <!-- Nav Links - Center aligned with gap -->
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+
+            <!-- CTA Button - Right aligned -->
+            <a href="#" class="nav-btn">
+                <span>&#128100;</span> Sign Up
+            </a>
+        </nav>
+    </div>
+
+    <!-- ========== MINI PROJECT 7: FLEXBOX CONTACT SECTION ========== -->
+    <div class="section-divider">
+        <div class="section-header">
+            <h2>Get In Touch</h2>
+            <p>Have questions? We'd love to hear from you</p>
+        </div>
+
+        <div class="contact-flex">
+            <!-- Left: Contact Form -->
+            <form class="contact-form">
+                <h3>Send us a Message</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="john@example.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" placeholder="How can we help?">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Write your message here..."></textarea>
+                </div>
+
+                <button type="submit" class="contact-submit">Send Message &#10148;</button>
+            </form>
+
+            <!-- Right: Contact Info -->
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+
+                <div class="info-item">
+                    <div class="info-icon">&#128222;</div>
+                    <div class="info-content">
+                        <h4>Phone</h4>
+                        <p>+91 98765 43210<br>+91 12345 67890</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">&#128231;</div>
+                    <div class="info-content">
+                        <h4>Email</h4>
+                        <p>info@techlearn.com<br>support@techlearn.com</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">&#128205;</div>
+                    <div class="info-content">
+                        <h4>Address</h4>
+                        <p>123 Tech Park, Sector 5<br>Chennai, Tamil Nadu 600001</p>
+                    </div>
+                </div>
+
+                <div class="contact-social">
+                    <a href="#" class="social-link">&#119314;</a>
+                    <a href="#" class="social-link">&#128295;</a>
+                    <a href="#" class="social-link">&#127380;</a>
+                    <a href="#" class="social-link">&#128247;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MINI PROJECT 8: NEWSLETTER SIGNUP BANNER ========== -->
+    <div class="section-divider">
+        <div class="section-header">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for latest updates</p>
+        </div>
+
+        <div class="newsletter-section">
+            <div class="newsletter-banner">
+                <div class="newsletter-content">
+                    <h3>Subscribe to Our Newsletter</h3>
+                    <p>Get the latest courses, tech news, and exclusive offers delivered straight to your inbox. Join 10,000+ learners today!</p>
+                </div>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address">
+                    <button type="submit" class="newsletter-btn">Subscribe Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
